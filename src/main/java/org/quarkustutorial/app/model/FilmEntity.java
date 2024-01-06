@@ -11,6 +11,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "film", schema = "sakila", catalog = "")
 public class FilmEntity {
+
+    public FilmEntity() {}
+
+    public FilmEntity(short filmId, String title, short length) {
+        this.filmId = filmId;
+        this.title = title;
+        this.length = length;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "film_id")

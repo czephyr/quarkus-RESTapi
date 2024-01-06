@@ -1,6 +1,7 @@
 package repository;
 
 import com.speedment.jpastreamer.application.JPAStreamer;
+import com.speedment.jpastreamer.projection.Projection;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.quarkustutorial.app.model.FilmEntity;
@@ -25,7 +26,7 @@ public class FilmRepository {
     }
 
     public Stream<FilmEntity> paged(long page, short minLength) {
-        return jpaStreamer.stream(FilmEntity.class)
+        return jpaStreamer.stream(Projection.select(FilmEntity$.filmId, FilmEntity$.title, FilmEntity$.length))
                 .filter(FilmEntity$.length.greaterThan(minLength))
                 .sorted(FilmEntity$.length)
                 .skip(page*PAGE_SIZE)
