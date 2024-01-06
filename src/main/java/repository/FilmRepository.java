@@ -2,6 +2,7 @@ package repository;
 
 import com.speedment.jpastreamer.application.JPAStreamer;
 import com.speedment.jpastreamer.projection.Projection;
+import com.speedment.jpastreamer.streamconfiguration.StreamConfiguration;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.quarkustutorial.app.model.FilmEntity;
@@ -32,4 +33,14 @@ public class FilmRepository {
                 .skip(page*PAGE_SIZE)
                 .limit(PAGE_SIZE);
     }
+
+    public Stream<FilmEntity> actors(String startsWith, short minLenght) {
+        final StreamConfiguration<FilmEntity> joining =
+                StreamConfiguration.of(FilmEntity.class).joining(FilmEntity$.actors);
+        return jpaStreamer.stream(joining)
+                .filter(FilmEntity$.title.startsWith(startsWith).and(FilmEntity$.length.greaterThan(minLenght)))
+                .sorted(FilmEntity$.length.reversed());
+    }
+
+
 }

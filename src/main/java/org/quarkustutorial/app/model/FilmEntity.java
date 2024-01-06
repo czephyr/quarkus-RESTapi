@@ -184,4 +184,8 @@ public class FilmEntity {
     public int hashCode() {
         return Objects.hash(filmId, title, description, releaseYear, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures, lastUpdate);
     }
+
+    public List<ActorEntity> getActors() {
+        return actors;
+    }
 }
