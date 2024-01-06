@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.quarkustutorial.app.model.FilmEntity;
 import repository.FilmRepository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -54,4 +55,18 @@ public class FilmResource {
                                 .collect(Collectors.joining(", "))))
                 .collect(Collectors.joining("\n"));
     }
+
+    @GET
+    @Path("/update/{minLength}/{rentalRate}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updatePrice(short minLength, BigDecimal rentalRate) {
+        filmRepository.updateRentalRate(minLength, rentalRate);
+        return filmRepository.getFilmsWithPrice(minLength)
+                .map(f -> String.format("%s (%d min): $%f",
+                        f.getTitle(),
+                        f.getLength(),
+                        f.getRentalRate()))
+                .collect(Collectors.joining("\n"));
+    }
+
 }

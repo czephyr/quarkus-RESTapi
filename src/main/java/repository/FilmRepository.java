@@ -5,10 +5,12 @@ import com.speedment.jpastreamer.projection.Projection;
 import com.speedment.jpastreamer.streamconfiguration.StreamConfiguration;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.quarkustutorial.app.model.FilmEntity;
 import org.quarkustutorial.app.model.FilmEntity$;
 
 import javax.swing.text.html.Option;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -24,6 +26,12 @@ public class FilmRepository {
         return jpaStreamer.stream(FilmEntity.class)
                 .filter(FilmEntity$.filmId.equal(filmId))
                 .findFirst();
+    }
+
+    public Stream<FilmEntity> getFilmsWithPrice(short minLength){
+        return jpaStreamer.stream(FilmEntity.class)
+                .filter(FilmEntity$.filmId.greaterThan(minLength))
+                .sorted(FilmEntity$.length);
     }
 
     public Stream<FilmEntity> paged(long page, short minLength) {
@@ -42,5 +50,12 @@ public class FilmRepository {
                 .sorted(FilmEntity$.length.reversed());
     }
 
-
+    @Transactional
+    public void updateRentalRate(short minLength, BigDecimal rentalRate) {
+        jpaStreamer.stream(FilmEntity.class)
+                .filter(FilmEntity$.length.greaterThan(minLength))
+                .forEach(f -> {
+                    f.setRentalRate(rentalRate);
+                });
+    }
 }

@@ -20,6 +20,13 @@ public class FilmEntity {
         this.length = length;
     }
 
+    public FilmEntity(short filmId, String title, short length, BigDecimal rentalRate) {
+        this.filmId = filmId;
+        this.title = title;
+        this.length = length;
+        this.rentalRate = rentalRate;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "film_id")
