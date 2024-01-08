@@ -1,4 +1,24 @@
 # quarkus-tutorial
+Project created following a tutorial for creating a RESTApi with automated tests.
+The RESTApi serves some endpoint which use the MYSQL Sakila docker image as a Database.
+
+The app is composed by the ORM created by Hibernate Panache, the Repository containing the methods accessing the underlying database through Java Streams using JPAStreamer and the RESTApi endpoints with a SwaggerGUI.
+<p align="center">
+<img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/arch.png" />
+</p>
+The APIs look like this:
+<p align="center">
+<img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/swagger.png"/>
+</p>
+The tutorial was also exploring automated test using Quarkus.
+The Quarkus execution will run tests everytime you prompt it for them with the `r` key.
+
+```shell script
+--
+All 2 tests are passing (0 skipped), 2 tests were run in 5625ms. Tests completed at 16:17:33.
+
+```
+<hr>
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
