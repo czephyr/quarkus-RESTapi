@@ -2,10 +2,22 @@
 Project created following a tutorial for creating a RESTApi with automated tests.
 The RESTApi serves some endpoint which use the MYSQL Sakila docker image as a Database.
 
-The app is composed by the ORM created by Hibernate Panache, the Repository containing the methods accessing the underlying database through Java Streams using JPAStreamer and the RESTApi endpoints with a SwaggerGUI.
+The app is composed by the ORM created by Hibernate Panache, the Repository containing the methods accessing the underlying database through Java Streams using JPAStreamer and the RESTApi endpoints with RestEasy and SwaggerGUI.
+
 <p align="center">
 <img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/arch.png" />
 </p>
+
+UML diagram:
+<p align="center">
+<img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/UML.png" />
+</p>
+
+Kubernetes deployment diagram:
+<p align="center">
+<img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/kubernetes_arch.png" />
+</p>
+
 The APIs look like this:
 <p align="center">
 <img src="https://github.com/czephyr/quarkus-RESTapi/blob/master/swagger.png"/>
